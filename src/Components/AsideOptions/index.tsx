@@ -1,5 +1,6 @@
 import React from 'react'
 import './AsideOptions.css'
+import { Link } from 'react-router-dom'
 
 export default function AsideOptions(){
 
@@ -22,13 +23,15 @@ export default function AsideOptions(){
 
     return(
         <div className='aside-bar'>
-            <h2 className='aside-title'>MarvelistAPI</h2>
-            <hr />
-            <button className='aside-button' id='personagens'>Personagens</button>
-            <button className='aside-button' id='quadrinhos'>Quadrinhos</button>
-            <button className='aside-button' id='criadores'>Criadores</button>
+            <h2 className='aside-title'>Marvelist API</h2>
+            <br/>
+            <nav className='aside-nav'>
+                <Link to="characters" className='aside-button' id='characters'>Personagens</Link>
+                <Link to="comics" className='aside-button' id='comics'>Quadrinhos</Link>
+                <Link to="creators" className='aside-button' id='creators'>Criadores</Link>
+            </nav>
             <div className='aside-input-box'>
-                <label htmlFor="" className='aside-title'>Insira suas chaves de API, coletadas diretamente do <a href='https://developer.marvel.com'>site</a> da Marvel.</label>
+                <label htmlFor="" className='aside-label'>Insira suas chaves de API, coletadas diretamente do <a href='https://developer.marvel.com' className='aside-link'>site</a> da Marvel.</label>
                 <input type="text" className='aside-input' placeholder='Insira sua chave pública aqui' id='public-key' required={true}></input>
                 <input type="text" className='aside-input' placeholder='Insira sua chave privada aqui' id='private-key' required={true}></input>
                 <button type='submit' className='aside-button-submit' onClick={salvaKey}>Enviar</button>

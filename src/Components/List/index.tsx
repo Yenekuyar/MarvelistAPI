@@ -4,7 +4,7 @@ export default function List({characters}:any){
     return (
         <div className='lista-container'>
             <ul className='item-container'>
-                {characters.map((character: any) => (
+                {characters.length > 0 && characters.map((character: any) => (
                     <li className='item-lista'>
                         <img className='item-imagem' src={character.thumbnail?.path + '.' + character.thumbnail?.extension} alt={character.name}></img>
                         <p>{character.name}</p>
