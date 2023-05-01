@@ -1,7 +1,6 @@
 import * as CryptoJS from 'crypto-js';
 
-export default function calculaHash(){
-
+export default function calculateHash(){
     const ts = Date.now().toString();
 
     const pubKey = localStorage.getItem('pubkey');
@@ -11,5 +10,5 @@ export default function calculaHash(){
 
     const hash = CryptoJS.MD5(hashString).toString();
 
-    return hash
-};
+    return [ts, pubKey, hash]
+}
