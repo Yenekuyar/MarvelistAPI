@@ -1,0 +1,25 @@
+.overlay-style {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+
+.modal-style {
+    position: fixed;
+    padding: 50px;
+    width: 500px;
+    height: 700px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #E74646;
+    z-index: 1000;
+    border-radius: 24px;
+}
+
+

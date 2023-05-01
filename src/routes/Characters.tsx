@@ -3,6 +3,7 @@ import calculateHash from '../Components/utils/calculateHash';
 import '../Components/List/List.css'
 import axios from 'axios';
 import DarkMode from '../Components/DarkMode';
+import Modal from '../Components/Modal';
 
 interface MarvelCharacter {
   id: number;
@@ -15,29 +16,31 @@ interface MarvelCharacter {
 }
 
 export default function Character() {
-
-  const [characters, setCharacters] = useState<MarvelCharacter[]>([])
+  const [characters, setCharacters] = useState<MarvelCharacter[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState<string>('');
+  const [filteredCharacters, setFilteredCharacters] = useState<MarvelCharacter[]>([]);
+  const [selectedCharacter, setSelectedCharacter] = useState<MarvelCharacter | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  
 
   useEffect(() => {
     async function getCharacters() {
       const montaUrl = calculateHash();
-      let url = `http://gateway.marvel.com/v1/public/characters?ts=${montaUrl[0]}&apikey=${montaUrl[1]}&hash=${montaUrl[2]}&offset=${(currentPage - 1) * 20}`
-      if (searchValue) {
-        setCharacters([])
-        url += `&nameStartsWith=${searchValue}`;
-      }
-      const resposta = await fetch(url);
+      const resposta = await fetch(`http://gateway.marvel.com/v1/public/characters?ts=${montaUrl[0]}&apikey=${montaUrl[1]}&hash=${montaUrl[2]}&offset=${(currentPage - 1) * 20}`);
       const respostaJson = await resposta.json();
-      const characters = respostaJson.data.results
+      const characters = respostaJson.data.results;
 
-      console.log(characters)
-      setCharacters(prevState => [...prevState, ...characters]);
-      //jetka
+      console.log(characters);
+      setCharacters((prevState) => [...prevState, ...characters]);
     }
     getCharacters();
-  }, [currentPage, searchValue]);
+  }, [currentPage]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleScroll = () => {
     const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
@@ -45,17 +48,35 @@ export default function Character() {
     const documentHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
 
     if (scrollY + windowHeight >= documentHeight) {
-      setCurrentPage(prevState => prevState + 1);
+      setCurrentPage((prevState) => prevState + 1);
+    }
+  };
+
+  const handleSearch = async () => {
+    if (searchValue !== '') {
+      const montaUrl = calculateHash();
+      const resposta = await fetch(
+        `http://gateway.marvel.com/v1/public/characters?ts=${montaUrl[0]}&apikey=${montaUrl[1]}&hash=${montaUrl[2]}&nameStartsWith=${searchValue}`
+      );
+      const respostaJson = await resposta.json();
+      const characters = respostaJson.data.results;
+
+      setFilteredCharacters(characters);
+    } else {
+      setFilteredCharacters([]);
     }
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    handleSearch();
+  }, [searchValue]);
+
+
+  // constante pra verificar se existe um valor de busca para passar ou o parâmetro de personagens filtrados ou a lista inteira (com o spread)
+  const characterList = searchValue !== '' ? filteredCharacters : characters;
 
   return (
-    <div>
+<div>
       <header className='header-container'>
         <h1 className='lista-titulo'>Personagens</h1>
         <input
@@ -69,22 +90,35 @@ export default function Character() {
       </header>
       <div className='lista-container'>
         <ul className='item-container'>
-          {characters.length > 0 && characters
+          {characterList.length > 0 && characterList
             .filter((character: MarvelCharacter) =>
               character.name.toLowerCase().includes(searchValue.toLowerCase())
             )
-            .map((character: MarvelCharacter) => (
+            .map((character: MarvelCharacter) => ( //renderiza individualmente os personagens
               <li className='item-lista' key={character.name}>
-                <img 
-                  className='item-imagem' 
-                  src={character.thumbnail?.path + '.' + character.thumbnail?.extension} 
+                <img
+                  className='item-imagem'
+                  src={character.thumbnail?.path + '.' + character.thumbnail?.extension}
                   alt={character.name}
                 />
                 <p>{character.name}</p>
+                <button className='aside-button' onClick={() => {
+                  setSelectedCharacter(character); // armazena o personagem selecionado no estado
+                  setIsOpen(true); // abre o modal
+                }}>Mais detalhes</button>
               </li>
             ))}
         </ul>
       </div>
+      {selectedCharacter && ( // renderiza o modal apenas se houver um personagem selecionado
+        <Modal
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+        >
+          <h2>{selectedCharacter.name}</h2>
+          <p>{selectedCharacter.description}</p>
+        </Modal>
+      )}
     </div>
   )
 }
