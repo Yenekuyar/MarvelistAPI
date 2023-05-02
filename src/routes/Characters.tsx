@@ -3,7 +3,8 @@ import calculateHash from '../Components/utils/calculateHash';
 import '../Components/List/List.css'
 import axios from 'axios';
 import DarkMode from '../Components/DarkMode';
-import Modal from '../Components/Modal';
+import ModalCharacter from '../Components/ModalCharacter';
+import '../Components/ModalCharacter/Modal.css'
 
 interface MarvelCharacter {
   id: number;
@@ -13,15 +14,20 @@ interface MarvelCharacter {
     path: string;
     extension: string;
   };
+  comics: {
+    available: string;
+  }
 }
 
 export default function Character() {
+
   const [characters, setCharacters] = useState<MarvelCharacter[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredCharacters, setFilteredCharacters] = useState<MarvelCharacter[]>([]);
   const [selectedCharacter, setSelectedCharacter] = useState<MarvelCharacter | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  
   
 
   useEffect(() => {
@@ -32,7 +38,8 @@ export default function Character() {
       const characters = respostaJson.data.results;
 
       console.log(characters);
-      setCharacters((prevState) => [...prevState, ...characters]);
+      // verifica se existe algum duplicado, eu tava com um bug de duplicar as primeiras requisições
+      setCharacters(prevState => [...prevState, ...characters.filter((character:any) => !prevState.some(prevCharacter => prevCharacter.id === character.id))]);
     }
     getCharacters();
   }, [currentPage]);
@@ -70,6 +77,7 @@ export default function Character() {
   useEffect(() => {
     handleSearch();
   }, [searchValue]);
+  
 
 
   // constante pra verificar se existe um valor de busca para passar ou o parâmetro de personagens filtrados ou a lista inteira (com o spread)
@@ -78,7 +86,7 @@ export default function Character() {
   return (
 <div>
       <header className='header-container'>
-        <h1 className='lista-titulo'>Personagens</h1>
+        <h1 className='lista-titulo'>Characters</h1>
         <input
           type="text"
           placeholder='Digite o personagem que deseja buscar...'
@@ -105,19 +113,21 @@ export default function Character() {
                 <button className='aside-button' onClick={() => {
                   setSelectedCharacter(character); // armazena o personagem selecionado no estado
                   setIsOpen(true); // abre o modal
-                }}>Mais detalhes</button>
+                }}>More details</button>
               </li>
             ))}
         </ul>
       </div>
       {selectedCharacter && ( // renderiza o modal apenas se houver um personagem selecionado
-        <Modal
+        <ModalCharacter
           open={isOpen}
           onClose={() => setIsOpen(false)}
+          name={selectedCharacter.name}
+          description={selectedCharacter.description}
+          comicQuantities={selectedCharacter.comics.available}
+          src={selectedCharacter.thumbnail?.path + '.' + selectedCharacter.thumbnail?.extension}
         >
-          <h2>{selectedCharacter.name}</h2>
-          <p>{selectedCharacter.description}</p>
-        </Modal>
+        </ModalCharacter>
       )}
     </div>
   )

@@ -5,7 +5,7 @@ import List from './Components/List';
 import axios from 'axios';
 import calculateHash from './Components/utils/calculateHash';
 import { Outlet } from 'react-router-dom';
-import Modal from './Components/Modal'
+import Modal from './Components/ModalCharacter'
 
 function App() {
 
