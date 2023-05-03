@@ -2,6 +2,7 @@ import React from 'react'
 import './AsideOptions.css'
 import { Link } from 'react-router-dom'
 
+
 export default function AsideOptions(){
 
     const chavePublica = (document.getElementById('public-key') as HTMLInputElement)
@@ -13,8 +14,7 @@ export default function AsideOptions(){
             localStorage.setItem('pubkey', chavePublica.value)
             localStorage.setItem('privkey', chavePrivada.value)
 
-            chavePublica.value = ''
-            chavePrivada.value = ''
+            alert('Keys stored')
         }
         else {
             alert('Você precisa preencher as duas chaves corretamente para utilizar o site!')
@@ -26,15 +26,15 @@ export default function AsideOptions(){
             <h2 className='aside-title'>Marvelist API</h2>
             <br/>
             <nav className='aside-nav'>
-                <Link to="characters" className='aside-button' id='characters'>Personagens</Link>
-                <Link to="comics" className='aside-button' id='comics'>Quadrinhos</Link>
-                <Link to="creators" className='aside-button' id='creators'>Criadores</Link>
+                <Link to="characters" className='aside-button' id='characters'>Characters</Link>
+                <Link to="comics" className='aside-button' id='comics'>Comics</Link>
+                <Link to="creators" className='aside-button' id='creators'>Creators</Link>
             </nav>
             <div className='aside-input-box'>
-                <label htmlFor="" className='aside-label'>Insira suas chaves de API, coletadas diretamente do <a href='https://developer.marvel.com' className='aside-link'>site</a> da Marvel.</label>
+                <label htmlFor="" className='aside-label'>Insert your API keys, collected in Marvel's <a href='https://developer.marvel.com' className='aside-link'>website</a>.</label>
                 <input type="text" className='aside-input' placeholder='Insira sua chave pública aqui' id='public-key' required={true}></input>
                 <input type="text" className='aside-input' placeholder='Insira sua chave privada aqui' id='private-key' required={true}></input>
-                <button type='submit' className='aside-button-submit' onClick={salvaKey}>Enviar</button>
+                <button type='submit' className='aside-button-submit' onClick={salvaKey}>Submit</button>
             </div>
         </div>
     )

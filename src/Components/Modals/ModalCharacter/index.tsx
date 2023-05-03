@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './Modal.css'
+import '../Modal.css'
 
-export default function ModalCharacter({ open, onClose, children, name, description, comicQuantities, src}: any) {
+export default function ModalCharacter({ open, onClose, children, name, description, comicQuantities, src, collectionURL}: any) {
   if (!open) return null;
 
   const portal = document.getElementById('portal');
@@ -15,16 +15,16 @@ export default function ModalCharacter({ open, onClose, children, name, descript
             <h1>{name}</h1>
           </div>
           <img src={src} alt={name} className='modal-image'/>
-          <h2>Description:</h2>
-          <br/>
-          <p>
-            {description}
-          </p>
-          <br />
-          <h2>Comic Appearances:</h2>
-          <br/>
-          <p>This character appeared in {comicQuantities} comics until today.</p>
-          <br/>
+          <div className='modal-content'>
+            <br/>
+            <p>
+              {description}
+            </p>
+            <br />
+            <p>This character appeared in {comicQuantities} comics until today.</p>
+            <br/>
+            <p className='modal-url'><a href={collectionURL}>Comics Link</a></p>
+          </div>
           <button onClick={onClose}>Close</button>
         </div>
       </div>

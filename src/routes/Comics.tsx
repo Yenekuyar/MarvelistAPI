@@ -2,16 +2,30 @@ import React, { useState, useEffect } from 'react'
 import calculateHash from '../Components/utils/calculateHash';
 import '../Components/List/List.css'
 import DarkMode from '../Components/DarkMode';
-import ModalComics from '../Components/ModalComics';
+import ModalComics from '../Components/Modals/ModalComics';
 
 interface MarvelComic {
   id: number;
   title: string;
+  pageCount: string;
   description: string;
   thumbnail: {
     path: string;
     extension: string;
   };
+  creators: {
+    items: [{
+      name: string;
+      role: string;
+    }]
+  }
+  resourceURI: string;
+  prices: [
+    {
+        type: string,
+        price: string
+    }
+  ]
 }
 
 export default function Creators() {
@@ -113,10 +127,12 @@ export default function Creators() {
         <ModalComics
           open={isOpen}
           onClose={() => setIsOpen(false)}
-          name={selectedComic.title}
-          description={selectedComic.description}
-          comicQuantities={selectedComic}
+          title={selectedComic.title}
+          pageCount={selectedComic.pageCount}
           src={selectedComic.thumbnail?.path + '.' + selectedComic.thumbnail?.extension}
+          creator={selectedComic.creators.items[0]?.name}
+          price={selectedComic?.prices[0].price}
+          description={selectedComic.description}
         >
         </ModalComics>
       )}

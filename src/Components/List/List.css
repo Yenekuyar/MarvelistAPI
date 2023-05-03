@@ -1,7 +1,7 @@
 
 header {
-    background-color: #E74646;
-    color:#FFF3E2;
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto);
 }
 
 .header-container {
@@ -9,7 +9,6 @@ header {
     margin-left: 160px;
     padding: 22px;
     justify-content: space-between;
-    
 }
 
 .lista-container {
@@ -20,7 +19,7 @@ header {
 
 .lista-titulo {
     display: absolute;
-    color: #FFE5CA;
+    color: var(--cor-texto);
     font-size: 32px;
     font-weight: 700;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
@@ -35,9 +34,9 @@ header {
 .item-lista {
     display: flex;
     flex-direction: column;
-    background-color: #E74646;
+    background-color: var(--cor-primaria);
     justify-content: space-around;
-    color: #FFF3E2;
+    color: var(--cor-texto);
     border-radius: 16px;
     border: 2px solid rgba(0,0,0,0.5);
     width: 200px;
@@ -45,15 +44,15 @@ header {
     text-align: center;
     align-items: center;
     margin: 16px;
-    box-shadow: 2px 2px 3px #000, -2px -3px 5px #FA9884;
-    text-shadow: 0 0 3px #FA9884, 0 0 5px #FFE5CA;
-}
+    box-shadow: 2px 2px 3px #000, 2px 2px 3px #ffffcc;
+    text-shadow: 0 0 3px var(--cor-secundaria)
+} 
 
 .item-imagem {
     width: 128px;
     height: 128px;
     border-radius: 50%;
-    border: 2px solid rgba(0, 0, 0, 0.50);
+    border: 2px solid var(--cor-secundaria);
 }
 
 .item-imagem:hover {
@@ -61,21 +60,20 @@ header {
     height: 136px;
     border: none;
     transition: 200ms;
-    cursor: pointer;
     border-radius: 10%;
+    border: 2px solid var(--cor-secundaria);
 }
 
 ::placeholder {
-    color: #FFF3E2;
+    color: var(--cor-texto);
     opacity: 1; 
   }
 
 .search-bar {
     border-radius: 12px;
-    background-color: #FA9884;
-    border: 2px solid rgba(0, 0, 0, 0.50);
+    background-color: var(--cor-secundaria);
     width: 800px;
     padding: 4px 8px;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    box-shadow: 2px 2px 5px 1px #000;
+    box-shadow: 1px 1px 2px 0.7px #000;
 }

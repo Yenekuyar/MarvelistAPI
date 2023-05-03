@@ -1,3 +1,7 @@
+:root{
+
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -61,15 +65,34 @@ button {
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Quicksand:wght@300;400;500&display=swap');
 
-body {
+body.light {
 	display: flex;
 	justify-content: center;
 	font-family: 'Oswald', sans-serif;
 	color: #000;
-	background-color: #FFE5CA;
+	background-color: var(--cor-terciaria);
 	height: 100%;
 	width: 100%;
 	box-sizing: border-box;
+	--cor-primaria: #D2001A;
+	--cor-secundaria: #46C2CB;
+	--cor-terciaria: #FFFAE7;
+	--cor-texto: #FFFAE7;
+}
+
+body.dark {
+	display: flex;
+	justify-content: center;
+	font-family: 'Oswald', sans-serif;
+	color: #000;
+	background-color: var(--cor-terciaria);
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+	--cor-primaria: #2b005c;
+	--cor-secundaria: #005810;
+	--cor-terciaria: #000000;
+	--cor-texto: #FFFAE7;
 }
 
 #root {

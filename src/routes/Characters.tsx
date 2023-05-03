@@ -3,8 +3,8 @@ import calculateHash from '../Components/utils/calculateHash';
 import '../Components/List/List.css'
 import axios from 'axios';
 import DarkMode from '../Components/DarkMode';
-import ModalCharacter from '../Components/ModalCharacter';
-import '../Components/ModalCharacter/Modal.css'
+import ModalCharacter from '../Components/Modals/ModalCharacter';
+
 
 interface MarvelCharacter {
   id: number;
@@ -17,6 +17,12 @@ interface MarvelCharacter {
   comics: {
     available: string;
   }
+  urls: [
+    {
+      url: string;
+    }
+  ]
+
 }
 
 export default function Character() {
@@ -126,6 +132,7 @@ export default function Character() {
           description={selectedCharacter.description}
           comicQuantities={selectedCharacter.comics.available}
           src={selectedCharacter.thumbnail?.path + '.' + selectedCharacter.thumbnail?.extension}
+          collectionURL={selectedCharacter.urls[0].url}
         >
         </ModalCharacter>
       )}

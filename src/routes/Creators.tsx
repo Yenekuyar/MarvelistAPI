@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import calculateHash from '../Components/utils/calculateHash';
 import '../Components/List/List.css'
 import DarkMode from '../Components/DarkMode';
-import ModalCreators from '../Components/ModalCreators';
+import ModalCreators from '../Components/Modals/ModalCreators';
 
 interface MarvelCreator {
   id: number;

@@ -1,7 +1,7 @@
 .aside-bar {
     display: flex;
     flex-direction: column;
-    background-color: #E74646;
+    background-color: var(--cor-primaria);
     width: 160px;
     height: 100%;
     position: fixed;
@@ -12,7 +12,7 @@
     padding-top: 20px;
     text-align: center;
     padding-top: 16px;
-    border: 2px solid rgba(0, 0, 0, 0.50);
+    border-right: 3px solid var(--cor-secundaria);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
@@ -24,38 +24,39 @@
 
 
 .aside-title {
-    color: #FFE5CA;
+    color: var(--cor-texto);
     padding: 16px 0;
     font-size: 28px;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    border-bottom: 1px solid #FFE5CA;
 }
 
 .aside-label {
-    color: #FFE5CA;
+    color: var(--cor-texto);
     padding: 16px 0;
+    margin: 8px 0;
 }
 
 .aside-link {
     text-decoration: none;
-    color: #fabf80;
+    color: var(--cor-secundaria);
     font-weight: 700;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .aside-button {
-    color: #FFE5CA;
+    color: var(--cor-texto);
     cursor: pointer;
     display: block;
     padding: 12px 0px;
     text-decoration: none;
     margin: 4px 0;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .aside-button:hover {
-    border-bottom: 1px solid #FFE5CA;
-    font-size: 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 5px 1px #000;
+    padding: 12px 18px;
     transition: 280ms;
 }
 
@@ -63,18 +64,19 @@
     bottom: 0;
     left: 0;
     height: 20%;
+    padding: 12px 0;
     position: absolute;
 }
 
 .aside-input {
     margin: 4px 0;
-    background-color: #FA9884;
+    background-color: var(--cor-secundaria);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     box-shadow: 2px 2px 5px 1px #000;
 }
 
 .aside-button-submit {
-    color: #FFE5CA;
+    color: var(--cor-texto);
     cursor: pointer;
     padding: 12px 0px;
     display: inline-block;

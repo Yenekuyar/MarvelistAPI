@@ -38,11 +38,11 @@
   }
   
   input:checked + .slider {
-    background-color: #FA9884;
+    background-color: var(--cor-secundaria);
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px #FA9884;
+    box-shadow: 0 0 1px var(--cor-secundaria);
   }
   
   input:checked + .slider:before {
