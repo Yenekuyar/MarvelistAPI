@@ -23,7 +23,9 @@ export default function ModalCharacter({ open, onClose, children, name, descript
             <br />
             <p>This character appeared in {comicQuantities} comics until today.</p>
             <br/>
-            <p className='modal-url'><a href={collectionURL}>Comics Link</a></p>
+            <h2 className='modal-url'>
+              <a href={collectionURL}>Character's Comics Link</a>
+            </h2>
           </div>
           <button onClick={onClose}>Close</button>
         </div>

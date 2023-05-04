@@ -34,7 +34,9 @@ export default function ModalCreators({ open, onClose, firstName, src, series, c
             </div>
             <p>If you want to know more about this creator, check out directly on Marvel website</p>
             <br />
-            <h2 className='modal-url'><a href={urls}>Website Link</a></h2>
+              <h2 className='modal-url'>
+                <a href={urls}>Website Link</a>
+              </h2>
           </div>
           <button onClick={onClose}>Close</button>
         </div>

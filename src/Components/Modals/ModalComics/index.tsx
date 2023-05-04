@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../Modal.css'
 
-export default function ModalComics({ open, onClose, pageCount, title, src, creator, price, description}: any) {
+export default function ModalComics({ open, onClose, pageCount, title, src, creator, price, description, urls}: any) {
   if (!open) return null;
 
   const portal = document.getElementById('portal');
@@ -30,6 +30,10 @@ export default function ModalComics({ open, onClose, pageCount, title, src, crea
             {price !== 0 && <p>
                 The price of this comic is {price} $
             </p>}
+            <br />
+              <h2 className='modal-url'>
+                <a href={urls}>Comic Link</a>
+              </h2>
           </div>
           <button onClick={onClose}>Close</button>
         </div>

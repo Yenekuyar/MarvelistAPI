@@ -1,0 +1,11 @@
+.app-placeholder {
+    color: var(--cor-terciaria);
+    background-color: var(--cor-primaria);
+    display: absolute;
+    text-align: center;
+    margin-top: 30%;
+    font-size: 36px;
+    margin: 30% 40px 30% 200px;
+    padding: 12px;
+    border-radius: 16px;
+}

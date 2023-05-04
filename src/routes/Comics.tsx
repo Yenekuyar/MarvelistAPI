@@ -26,6 +26,11 @@ interface MarvelComic {
         price: string
     }
   ]
+  urls: [
+    {
+      url: string;
+    }
+  ]
 }
 
 export default function Creators() {
@@ -133,6 +138,7 @@ export default function Creators() {
           creator={selectedComic.creators.items[0]?.name}
           price={selectedComic?.prices[0].price}
           description={selectedComic.description}
+          urls={selectedComic?.urls[0].url}
         >
         </ModalComics>
       )}
